@@ -2,6 +2,7 @@ package com.restaurant;
 
 import com.restaurant.factorymethod.*;
 import com.restaurant.abstractfactory.*;
+import com.restaurant.bridge.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -18,6 +19,16 @@ public class Main {
 
         RestaurantMealFactory premiumFactory = new PremiumMealFactory();
         serveMeal(premiumFactory);
+
+        System.out.println("=== PART C: Bridge Pattern Test ===");
+        KitchenDevice gasGrill = new GasGrill();
+        KitchenDevice electricOven = new ElectricOven();
+
+        MealOrder customBurger = new BurgerOrder(gasGrill);
+        customBurger.assembleMeal();
+
+        MealOrder customPizza = new PizzaOrder(electricOven);
+        customPizza.assembleMeal();
     }
 
     public static void serveMeal(RestaurantMealFactory factory) {
@@ -29,3 +40,4 @@ public class Main {
         System.out.println("--- Combo Meal Served ---\n");
     }
 }
+
